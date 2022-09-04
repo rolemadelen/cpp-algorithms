@@ -23,7 +23,7 @@ public:
     /* common operations */
     void push(T data);
     T pop();
-    T top();
+    T peek();
     bool isEmpty();
     bool isFull();
     int size();
@@ -72,7 +72,7 @@ T Stack<T>::pop() {
 }
 
 template <typename T>
-T Stack<T>::top() {
+T Stack<T>::peek() {
     return stack[topPos-1];
 }
 
