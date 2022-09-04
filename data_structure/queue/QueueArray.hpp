@@ -34,13 +34,7 @@ public:
     void print();
 
     /* advanced operations */
-    // copy the topmost item and push it to the queue.
-    void duplicate();
-
-    // if queue contains 2 or more items, swap 2 topmost items in the queue.
-    void swap();
-
-    // move the topmost elements in the queue 'rotation' times to the right.
+    // Rotate the array 'rotation' times to the right.
     void rotate(int rotation);
 
 private:
@@ -139,27 +133,6 @@ void Queue<T>::print()
         cout << queue[i] << " ";
     }
     cout << endl;
-}
-
-template <typename T>
-void Queue<T>::duplicate()
-{
-    if (!isEmpty())
-    {
-        queue[pos] = queue[pos - 1];
-        ++pos;
-    }
-}
-
-template <typename T>
-void Queue<T>::swap()
-{
-    if (pos >= 2)
-    {
-        T temp = queue[pos - 2];
-        queue[pos - 2] = queue[pos - 1];
-        queue[pos - 1] = temp;
-    }
 }
 
 template <typename T>
