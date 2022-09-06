@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <iostream>
 using std::cerr;
 using std::cout;
@@ -81,30 +82,26 @@ bool LinkedList<T>::empty()
 template <typename T>
 T LinkedList<T>::value_at(int index)
 {
-    if (index >= size)
-    {
-        cerr << "Index out of bound." << endl;
-        return static_cast<T>(-1);
-    }
+    if (index < 0 || index > size)
+        throw std::invalid_argument("Index out of bound");
 
     Node<T> *temp = head;
     for (int i = 0; i < index; ++i)
-    {
         temp = temp->next;
-    }
 
     return temp->data;
 }
 
 template <typename T>
-int LinkedList<T>::find(T data) {
+int LinkedList<T>::find(T data)
+{
     Node<T> *curr = head;
     int pos = 0;
 
-    while(curr) {
-        if(curr->data == data) {
+    while (curr)
+    {
+        if (curr->data == data)
             return pos;
-        }
         curr = curr->next;
         ++pos;
     }
@@ -116,10 +113,7 @@ template <typename T>
 void LinkedList<T>::insert(int index, T data)
 {
     if (index < 0 || index > size)
-    {
-        cerr << "Index out of bound." << endl;
-        return;
-    }
+        throw std::invalid_argument("Index out of bound");
 
     if (index == 0)
     {
@@ -190,10 +184,7 @@ template <typename T>
 T LinkedList<T>::pop_front()
 {
     if (empty())
-    {
-        cerr << "List is empty." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (size == 1)
     {
@@ -219,10 +210,7 @@ template <typename T>
 T LinkedList<T>::pop_back()
 {
     if (empty())
-    {
-        cerr << "List is empty." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (size == 1)
     {
@@ -264,9 +252,7 @@ void LinkedList<T>::erase(int index)
         Node<T> *curr = head;
 
         for (int i = 0; i < index; ++i)
-        {
             curr = curr->next;
-        }
 
         curr->prev->next = curr->next;
         curr->next->prev = curr->prev;
@@ -280,19 +266,14 @@ void LinkedList<T>::remove_value(T data)
 {
     int pos;
     while ((pos = find(data)) != -1)
-    {
         erase(pos);
-    }
 }
 
 template <typename T>
 T LinkedList<T>::front()
 {
     if (empty())
-    {
-        cerr << "List is empty.." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (head)
         return head->data;
@@ -302,10 +283,7 @@ template <typename T>
 T LinkedList<T>::back()
 {
     if (empty())
-    {
-        cerr << "List is empty.." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (tail)
         return tail->data;
@@ -321,7 +299,7 @@ void LinkedList<T>::print()
 
     while (temp->next)
     {
-        cout << temp->data << " ";
+        cout << temp->data << " -> ";
         temp = temp->next;
     }
 

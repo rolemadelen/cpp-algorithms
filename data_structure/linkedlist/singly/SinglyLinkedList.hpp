@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <iostream>
 using std::cerr;
 using std::cout;
@@ -80,30 +81,27 @@ bool LinkedList<T>::empty()
 template <typename T>
 T LinkedList<T>::value_at(int index)
 {
-    if (index >= size)
-    {
-        cerr << "Index out of bound." << endl;
-        return static_cast<T>(-1);
-    }
+    if (index < 0 || index > size)
+        throw std::invalid_argument("Index out of bound");
 
     Node<T> *temp = head;
     for (int i = 0; i < index; ++i)
-    {
         temp = temp->next;
-    }
 
     return temp->data;
 }
 
 template <typename T>
-int LinkedList<T>::find(T data) {
+int LinkedList<T>::find(T data)
+{
     Node<T> *curr = head;
     int pos = 0;
 
-    while(curr) {
-        if(curr->data == data) {
+    while (curr)
+    {
+        if (curr->data == data)
             return pos;
-        }
+
         curr = curr->next;
         ++pos;
     }
@@ -115,10 +113,7 @@ template <typename T>
 void LinkedList<T>::insert(int index, T data)
 {
     if (index < 0 || index > size)
-    {
-        cerr << "Index out of bound." << endl;
-        return;
-    }
+        throw std::invalid_argument("Index out of bound");
 
     if (index == 0)
     {
@@ -133,9 +128,7 @@ void LinkedList<T>::insert(int index, T data)
         Node<T> *curr = head;
 
         for (int i = 1; i < index; ++i)
-        {
             curr = curr->next;
-        }
 
         Node<T> *newNode = new Node<T>(data);
         newNode->next = curr->next;
@@ -184,10 +177,7 @@ template <typename T>
 T LinkedList<T>::pop_front()
 {
     if (empty())
-    {
-        cerr << "List is empty." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (size == 1)
     {
@@ -212,10 +202,7 @@ template <typename T>
 T LinkedList<T>::pop_back()
 {
     if (empty())
-    {
-        cerr << "List is empty." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (size == 1)
     {
@@ -227,13 +214,12 @@ T LinkedList<T>::pop_back()
     Node<T> *temp = head;
 
     while (temp->next != tail)
-    {
         temp = temp->next;
-    }
 
     T data = tail->data;
     if (tail)
         delete tail;
+
     temp->next = nullptr;
     tail = temp;
 
@@ -245,11 +231,8 @@ T LinkedList<T>::pop_back()
 template <typename T>
 void LinkedList<T>::erase(int index)
 {
-    if (index < 0 || index >= size)
-    {
-        cerr << "Index out of bound." << endl;
-        return;
-    }
+    if (index < 0 || index > size)
+        throw std::invalid_argument("Index out of bound");
 
     if (index == 0)
     {
@@ -264,9 +247,7 @@ void LinkedList<T>::erase(int index)
         Node<T> *curr = head;
 
         for (int i = 1; i < index; ++i)
-        {
             curr = curr->next;
-        }
 
         Node<T> *temp = curr->next;
         curr->next = curr->next->next;
@@ -282,9 +263,7 @@ void LinkedList<T>::remove_value(T data)
     {
         int pos = find(data);
         if (pos == -1)
-        {
             break;
-        }
         erase(pos);
     }
 }
@@ -293,10 +272,7 @@ template <typename T>
 T LinkedList<T>::front()
 {
     if (empty())
-    {
-        cerr << "List is empty.." << endl;
-        return static_cast<T>(-1);
-    }
+        throw std::invalid_argument("List is empty");
 
     if (head)
         return head->data;
