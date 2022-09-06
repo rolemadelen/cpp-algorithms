@@ -8,7 +8,7 @@ Algorithms and data structures implemented in C++
   + XOR Linked List
 - [Stack](./data_structure/stack/)
   + [Stack - Array](./data_structure/stack/StackArray.hpp)
-  + Stack - Linked List
+  + [Stack - Linked List](./data_structure/stack/StackLinkedList.hpp)
 - [Queue](./data_structure/queue)
   + [Queue - Array](./data_structure/queue/QueueArray.hpp)
   + Queue - Linked List
