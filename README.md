@@ -11,7 +11,7 @@ Algorithms and data structures implemented in C++
   + [Stack - Linked List](./data_structure/stack/StackLinkedList.hpp)
 - [Queue](./data_structure/queue)
   + [Queue - Array](./data_structure/queue/QueueArray.hpp)
-  + Queue - Linked List
+  + [Queue - LinkedList](./data_structure/queue/QueueLinkedList.hpp)
 - [Hash Table](./data_structure/hash_table/)
   + [Closed Hashing (Linear Probing)](./data_structure/hash_table/closed_hashing.hpp)
   + [Open Hashing (Chaining)](./data_structure/hash_table/closed_hashing.hpp)
