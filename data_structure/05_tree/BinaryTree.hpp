@@ -40,12 +40,15 @@ public:
     void preorder();
     void levelOrderTraversal();
 
+    bool isFullBinaryTree();
+
 private:
     Node<T> *root;
 
-    void inorderHelper(Node<T> *node);
-    void preorderHelper(Node<T> *node);
-    void postorderHelper(Node<T> *node);
+    void inorderHelper(Node<T> *);
+    void preorderHelper(Node<T> *);
+    void postorderHelper(Node<T> *);
+    bool isFullBinaryTreeHelper(Node<T> *);
 };
 
 template <typename T>
@@ -88,14 +91,16 @@ void BinaryTree<T>::levelOrderTraversal()
     queue<Node<T> *> q;
     q.push(root);
 
-    while(!q.empty())
+    while (!q.empty())
     {
         Node<T> *node = q.front();
         q.pop();
         cout << node->data << " ";
 
-        if(node->left) q.push(node->left);
-        if(node->right) q.push(node->right);
+        if (node->left)
+            q.push(node->left);
+        if (node->right)
+            q.push(node->right);
     }
 
     cout << endl;
@@ -151,4 +156,25 @@ void BinaryTree<T>::postorderHelper(Node<T> *node)
     postorderHelper(node->left);
     postorderHelper(node->right);
     cout << node->data << " ";
+}
+
+template <typename T>
+bool BinaryTree<T>::isFullBinaryTree()
+{
+    return isFullBinaryTreeHelper(root);
+}
+
+template <typename T>
+bool BinaryTree<T>::isFullBinaryTreeHelper(Node<T> *node)
+{
+    if (!node)
+        return true;
+
+    if (!(node->left) && !(node->right))
+        return true;
+
+    if (node->left && node->right)
+        return (isFullBinaryTreeHelper(node->left) && isFullBinaryTreeHelper(node->right));
+
+    return false;
 }
