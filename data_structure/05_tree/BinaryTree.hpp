@@ -38,6 +38,7 @@ public:
     void inorder();
     void postorder();
     void preorder();
+    void levelOrderTraversal();
 
 private:
     Node<T> *root;
@@ -82,6 +83,25 @@ void BinaryTree<T>::insertLeverOrder(T data)
 }
 
 template <typename T>
+void BinaryTree<T>::levelOrderTraversal()
+{
+    queue<Node<T> *> q;
+    q.push(root);
+
+    while(!q.empty())
+    {
+        Node<T> *node = q.front();
+        q.pop();
+        cout << node->data << " ";
+
+        if(node->left) q.push(node->left);
+        if(node->right) q.push(node->right);
+    }
+
+    cout << endl;
+}
+
+template <typename T>
 void BinaryTree<T>::inorder()
 {
     inorderHelper(root);
@@ -103,7 +123,8 @@ void BinaryTree<T>::postorder()
 template <typename T>
 void BinaryTree<T>::inorderHelper(Node<T> *node)
 {
-    if (!node) return;
+    if (!node)
+        return;
 
     inorderHelper(node->left);
     cout << node->data << " ";
@@ -113,7 +134,8 @@ void BinaryTree<T>::inorderHelper(Node<T> *node)
 template <typename T>
 void BinaryTree<T>::preorderHelper(Node<T> *node)
 {
-    if (!node) return;
+    if (!node)
+        return;
 
     cout << node->data << " ";
     preorderHelper(node->left);
@@ -123,8 +145,9 @@ void BinaryTree<T>::preorderHelper(Node<T> *node)
 template <typename T>
 void BinaryTree<T>::postorderHelper(Node<T> *node)
 {
-    if (!node) return;
-    
+    if (!node)
+        return;
+
     postorderHelper(node->left);
     postorderHelper(node->right);
     cout << node->data << " ";
