@@ -17,3 +17,4 @@ Algorithms and data structures implemented in C++
   + [Open Hashing (Chaining)](./data_structure/04_hash_table/closed_hashing.hpp)
 - [Tree](./data_structure/05_tree)
   + [Binary Tree](./data_structure/05_tree/BinaryTree.hpp)
+  + [Binary Search Tree](./data_structure/05_tree/BinarySearchTree.hpp)
