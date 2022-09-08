@@ -46,13 +46,13 @@ public:
 private:
     Node<T> *root;
 
-    void inorderHelper(Node<T> *);
-    void preorderHelper(Node<T> *);
-    void postorderHelper(Node<T> *);
+    void inorder(Node<T> *);
+    void preorder(Node<T> *);
+    void postorder(Node<T> *);
 
     int depth(Node<T> *);
-    bool isFullBinaryTreeHelper(Node<T> *);
-    bool isPerfectBinaryTreeHelper(Node<T> *, int, int);
+    bool isFullBinaryTree(Node<T> *);
+    bool isPerfectBinaryTree(Node<T> *, int, int);
 };
 
 template <typename T>
@@ -113,63 +113,63 @@ void BinaryTree<T>::levelOrderTraversal()
 template <typename T>
 void BinaryTree<T>::inorder()
 {
-    inorderHelper(root);
+    inorder(root);
     cout << endl;
 }
 template <typename T>
 void BinaryTree<T>::preorder()
 {
-    preorderHelper(root);
+    preorder(root);
     cout << endl;
 }
 template <typename T>
 void BinaryTree<T>::postorder()
 {
-    postorderHelper(root);
+    postorder(root);
     cout << endl;
 }
 
 template <typename T>
-void BinaryTree<T>::inorderHelper(Node<T> *node)
+void BinaryTree<T>::inorder(Node<T> *node)
 {
     if (!node)
         return;
 
-    inorderHelper(node->left);
+    inorder(node->left);
     cout << node->data << " ";
-    inorderHelper(node->right);
+    inorder(node->right);
 }
 
 template <typename T>
-void BinaryTree<T>::preorderHelper(Node<T> *node)
+void BinaryTree<T>::preorder(Node<T> *node)
 {
     if (!node)
         return;
 
     cout << node->data << " ";
-    preorderHelper(node->left);
-    preorderHelper(node->right);
+    preorder(node->left);
+    preorder(node->right);
 }
 
 template <typename T>
-void BinaryTree<T>::postorderHelper(Node<T> *node)
+void BinaryTree<T>::postorder(Node<T> *node)
 {
     if (!node)
         return;
 
-    postorderHelper(node->left);
-    postorderHelper(node->right);
+    postorder(node->left);
+    postorder(node->right);
     cout << node->data << " ";
 }
 
 template <typename T>
 bool BinaryTree<T>::isFullBinaryTree()
 {
-    return isFullBinaryTreeHelper(root);
+    return isFullBinaryTree(root);
 }
 
 template <typename T>
-bool BinaryTree<T>::isFullBinaryTreeHelper(Node<T> *node)
+bool BinaryTree<T>::isFullBinaryTree(Node<T> *node)
 {
     if (!node)
         return true;
@@ -178,7 +178,7 @@ bool BinaryTree<T>::isFullBinaryTreeHelper(Node<T> *node)
         return true;
 
     if (node->left && node->right)
-        return (isFullBinaryTreeHelper(node->left) && isFullBinaryTreeHelper(node->right));
+        return (isFullBinaryTree(node->left) && isFullBinaryTree(node->right));
 
     return false;
 }
@@ -200,11 +200,11 @@ bool BinaryTree<T>::isPerfectBinaryTree()
 {
     int d = depth(root);
     int level = 0;
-    return isPerfectBinaryTreeHelper(root, d, level);
+    return isPerfectBinaryTree(root, d, level);
 }
 
 template <typename T>
-bool BinaryTree<T>::isPerfectBinaryTreeHelper(Node<T> *node, int d, int level)
+bool BinaryTree<T>::isPerfectBinaryTree(Node<T> *node, int d, int level)
 {
     if (!node)
         return true;
@@ -215,6 +215,6 @@ bool BinaryTree<T>::isPerfectBinaryTreeHelper(Node<T> *node, int d, int level)
     if (!(node->left) || !(node->right))
         return d == level + 1;
 
-    return isPerfectBinaryTreeHelper(node->left, d, level + 1) && 
-           isPerfectBinaryTreeHelper(node->right, d, level + 1);
+    return isPerfectBinaryTree(node->left, d, level + 1) && 
+           isPerfectBinaryTree(node->right, d, level + 1);
 }
